@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 8.2 — Auto-Responsive Image Gallery</title>
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7f6;
+      color: #333;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #64748b;
+    }
+
+    /* STEP 3 & 5: CSS Grid Layout with auto-fit, minmax, and gap */
+    .gallery-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      /* STEP 3: Auto-responsive columns adjusting between 250px and 1fr */
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      /* STEP 5: Consistent spacing between grid items */
+      gap: 1.5rem;
+    }
+
+    /* STEP 2: Gallery Item Styling */
+    .gallery-item {
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* STEP 4: Image responsive width and object-fit */
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover; /* Prevents distortion while keeping aspect ratio */
+      display: block;
+    }
+
+    .gallery-caption {
+      padding: 1rem;
+      text-align: center;
+      font-weight: 500;
+      color: #334155;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Auto-Responsive Photo Gallery</h1>
+    <p>Resize your browser window to observe columns adjusting automatically without media queries.</p>
+  </header>
+
+  <main>
+    <!-- STEP 1 & 2: Gallery container with 8 gallery items containing high-quality images -->
+    <div class="gallery-container">
+      
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Mountain Landscape">
+        <div class="gallery-caption">Majestic Mountains</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1511497584788-8767611136f6?auto=format&fit=crop&w=600&q=80" alt="Deep Forest">
+        <div class="gallery-caption">Mystic Forest</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Tropical Beach">
+        <div class="gallery-caption">Sunny Coastline</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80" alt="Foggy Valley">
+        <div class="gallery-caption">Foggy Valley</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80" alt="Sunlight in Woods">
+        <div class="gallery-caption">Autumn Sunshine</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80" alt="Mountain Pass">
+        <div class="gallery-caption">Wilderness Trail</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=600&q=80" alt="Ocean Sunset">
+        <div class="gallery-caption">Ocean Sunset</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&w=600&q=80" alt="Desolation Lake">
+        <div class="gallery-caption">Alpine Lake</div>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
+Key Technical Implementation Details:
+8 High-Quality Images (Step 1 & 2): Used Unsplash royalty-free images wrapped inside .gallery-item containers.
+
+Auto-Responsive Grid (Step 3):grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+auto-fit automatically calculates how many columns can fit based on available screen space.
+
+minmax(250px, 1fr) guarantees each image item is at least 250px wide, but stretches equally (1fr) to fill any extra space.
+
+Image Fit & Spacing (Step 4 & 5):
+
+width: 100% ensures the image fills its container item width.
+
+object-fit: cover preserves proper aspect ratio without squishing or stretching images.
+
+gap: 1.5rem maintains clean spacing between grid cards across all screen sizes.
+
+Verification (Step 6):
+
+Desktop View: Displays 4 columns per row (~1200px width).
+
+Tablet View: Automatically reflows into 2–3 columns per row without media queries.
+
+Mobile View: Automatically stacks into 1 single column when width drops below ~500px.
+
+Recommended Screenshots for Submission:
+To complete step 6 for your submission:
+
+Open the HTML file in your browser at full screen and take a Desktop Screenshot (showing 3–4 columns in a row).
+
+Resize your browser window down to mobile width (or open DevTools Ctrl + Shift + I / Cmd + Option + I to simulate iPhone/Mobile view) and take a Mobile Screenshot (showing 1–2 columns).
